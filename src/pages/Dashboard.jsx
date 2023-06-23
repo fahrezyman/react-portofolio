@@ -1,39 +1,76 @@
-import { Link } from "react-router-dom"
-import Button from "../components/Button"
-import Profile from "./Profile"
+import { Link } from "react-router-dom";
+import Button from "../components/Button";
+import Profile from "./Profile";
+import Photo from "../container/Photos";
+import { useState } from "react";
 
 const Dashboard = () => {
+  const [count, setCount] = useState(1);
+  console.log(count);
+
   return (
     <>
       <div>Dashboard</div>
-      
-      
+
       <div>
-        <Button style={{
-          color: 'red'
-        }}>
+        <Button
+          style={{
+            color: "red",
+          }}
+        >
           Hitung 1
         </Button>
-        
-        <Button style={{
-          color: 'blue'
-        }}>
+
+        <Button
+          style={{
+            color: "blue",
+          }}
+        >
           Hitung 2
         </Button>
-        <Button style={{
-          color: 'green'
-        }}>
+        <Button
+          style={{
+            color: "green",
+          }}
+        >
           Hitung 3
         </Button>
       </div>
 
       <div>
-        <Link to='/profile'>
-          link ke halaman Profile
-        </Link>
+        <Link to="/profile">link ke halaman Profile</Link>
       </div>
-    </>
-  )
-}
+      {Array(3)
+        .fill(null)
+        .map((_, key) => (
+          <Photo index={key + count} key={key + count} />
+        ))}
 
-export default Dashboard
+      <Button
+        style={{
+          color: "green",
+        }}
+        onClick={() => {
+          setCount(count + 1);
+          console.log(count);
+        }}
+      >
+        NEXT
+      </Button>
+
+      <Button
+        style={{
+          color: "green",
+        }}
+        onClick={() => {
+          setCount(count - 1);
+          console.log(count);
+        }}
+      >
+        Previous
+      </Button>
+    </>
+  );
+};
+
+export default Dashboard;
